@@ -1,0 +1,113 @@
+---------------------------
+query getAllUsers{
+  users{
+    _id
+    firstName
+    lastName
+    email
+  }
+}
+---------------------------
+query getUserById{
+  user(_id:"23131"){
+    _id
+    firstName
+    lastName
+    email
+  }
+}
+----------------------
+query getUserById($userid:ID!){
+  user(_id:$userid){
+    _id
+    firstName
+    lastName
+    email
+  }
+}
+-----------------------------
+query getAllQuotes{
+  quotes{
+    name
+    by  
+  }
+}
+-----------------------------
+query getQuotebyUser{
+  iquote(by:"4232"){
+    name
+    by
+  }
+}
+----------------------
+query getQuoteByUser($quoteby:ID!){
+  iquote(by:$quoteby){
+    name
+    by
+  }
+}
+---------------------
+mutation createUser($userNew:UserInput!){
+  user:signupUserDummy(userNew:$userNew){ 
+    _id
+    email
+    firstName
+    lastName
+  }
+}
+
+{
+  "userNew": {
+    "firstName": "navin",
+    "lastName": "ssd",
+    "email": "sdsad@sd.com",
+    "password": "12345"
+  }
+}
+----------------------
+mutation createUser($userNew:UserInput!){
+  user:signupUser(userNew:$userNew){ 
+    _id
+    email
+    firstName
+    lastName
+  }
+}
+
+{
+  "userNew": {
+    "firstName": "navin",
+    "lastName": "sharma",
+    "email": "navin@navin.com",
+    "password": "12345"
+  }
+}
+
+--------------------
+mutation SigninUser($userSignin:UserSigninInput!){
+  user:signinUser(userSignin:$userSignin){ 
+    token
+  }
+}
+
+{
+  "userSignin": {
+    "email": "navin@navin.com",
+    "password": "12345"
+  }
+}
+--------------------
+
+
+mutation createQuote{
+  quote:createQuote(name:"i am another nice quote")
+}
+
+ // NOTE: 1. To create a quote you need to be logged in first,i.e run signinUser , token is generated, paste the token in HTTP HEADERS and then run createQuote
+   
+ HTTP HEADERS
+
+ {
+   "authorization" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDUzNDgzNWE3YTZhNDY5MWQ0YTk4YTAiLCJpYXQiOjE2ODMxNzk2MTd9.fI_xkfjF6ONGUGEv_-zoIts_RYqkOwB_3mELEr6-HOc"
+ }
+---------------------
